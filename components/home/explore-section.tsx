@@ -12,7 +12,7 @@ export function ExploreSection() {
                     Let&apos;s know us <ArrowRight className="h-3 w-3" />
                 </div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight max-w-4xl mx-auto leading-[1.1]">
-                    Explore Options, About St. Louis, <br className="hidden md:block" /> Your Health, Our Priority
+                    Explore Options, About Hospitals, <br className="hidden md:block" /> Your Health, Our Priority
                 </h2>
             </div>
 
@@ -25,7 +25,7 @@ export function ExploreSection() {
                         About Us
                     </div>
                     <p className="text-xl md:text-2xl font-medium leading-relaxed mb-8">
-                        St. Louis is a trusted platform connecting patients with top hospitals across the country.
+                        Hospitals is a trusted platform connecting patients with top hospitals across the country.
                     </p>
                     <Button className="rounded-full bg-black text-white h-12 px-6 w-fit gap-4 group mt-auto hover:bg-black/80">
                         Learn More
@@ -49,7 +49,7 @@ export function ExploreSection() {
 
                     {/* Tags */}
                     <div className="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm">
-                        Outdoor area
+                        OPD area
                     </div>
 
                     <div className="absolute top-8 right-8 max-w-[200px] text-right text-white text-lg font-medium leading-tight opacity-0 group-hover:opacity-100 transition-opacity duration-300">

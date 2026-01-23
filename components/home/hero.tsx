@@ -29,11 +29,11 @@ export function Hero() {
 
                 {/* Main Heading */}
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight leading-[1.1] mb-6 max-w-5xl mx-auto drop-shadow-lg">
-                    World-Class Care, <br /> Right Here in St. Louis
+                    World-Class Care, <br /> Right Here in Hospitals
                 </h1>
 
                 <p className="text-white/95 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-8 md:mb-12 drop-shadow-md px-4">
-                    Experience advanced medical treatments and compassionate care at Sunrise Hospital. <br className="hidden md:block" />
+                    Experience advanced medical treatments and compassionate care at Hospital. <br className="hidden md:block" />
                     Your wellness is our mission.
                 </p>
 

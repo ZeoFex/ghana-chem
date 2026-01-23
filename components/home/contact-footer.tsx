@@ -10,7 +10,7 @@ export function ContactFooter() {
             <div className="relative w-full max-w-[1440px] mx-auto px-4 sm:px-8 mb-24">
                 <div className="relative z-10 flex flex-wrap justify-center text-center">
                     <h2 className="text-[12vw] leading-[0.85] font-medium tracking-tighter text-black uppercase">
-                        Sunrise- Contact
+                        HOSPITAL- Contact
                     </h2>
                 </div>
 
@@ -75,7 +75,7 @@ export function ContactFooter() {
 
                 {/* Right: Copyright */}
                 <div className="text-sm font-medium text-right">
-                    © 2024 Sunrise Health. All Rights Reserved.
+                    © 2025 Hospitals. All Rights Reserved.
                 </div>
             </div>
         </footer>

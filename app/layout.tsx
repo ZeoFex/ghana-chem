@@ -8,7 +8,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Sunrise Hospitals",
+  title: "Hospitals",
   description: "Discover Hospitals, Access Care, & Find Trusted Services Nearby",
 };
 
