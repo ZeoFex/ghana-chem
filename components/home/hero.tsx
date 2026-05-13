@@ -33,7 +33,7 @@ export function Hero() {
 
                 <h1 className="mb-6 max-w-5xl text-4xl font-medium leading-[1.08] tracking-tight text-white drop-shadow-sm sm:text-5xl md:text-6xl lg:text-7xl">
                     Chemistry that serves <br className="hidden sm:block" />
-                    Ghana—and the world
+                    Ghana and the world
                 </h1>
 
                 <p className="mb-8 max-w-2xl px-2 text-base font-light leading-relaxed text-white/95 drop-shadow-sm sm:text-lg md:mb-12 md:text-xl">

@@ -198,28 +198,28 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
                                     placeholder="Search programs, pages, and resources…"
-                                    className="w-full h-14 pl-12 pr-12 text-base md:text-lg rounded-xl bg-gray-50 border-transparent focus:bg-white focus:border-gcs-primary transition-all"
+                                    className="h-14 w-full rounded-xl border-slate-200 bg-gray-50 pl-12 pr-12 text-base text-slate-900 placeholder:text-slate-500 focus:border-gcs-primary focus:bg-white focus-visible:ring-gcs-primary/25 md:text-lg"
                                 />
                                 {query && (
                                     <button
                                         onClick={() => setQuery("")}
                                         className="absolute right-4 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors"
                                     >
-                                        <X className="h-4 w-4" />
+                                        <X className="h-4 w-4 text-slate-600" />
                                     </button>
                                 )}
                             </div>
 
                             {/* Keyboard hints - Desktop only */}
-                            <div className="hidden md:flex items-center gap-4 mt-3 text-xs text-gray-400">
+                            <div className="hidden md:flex items-center gap-4 mt-3 text-xs text-slate-500">
                                 <span className="flex items-center gap-1">
-                                    <kbd className="px-1.5 py-0.5 rounded bg-gray-100 font-mono">↑↓</kbd> Navigate
+                                    <kbd className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-slate-700">↑↓</kbd> Navigate
                                 </span>
                                 <span className="flex items-center gap-1">
-                                    <kbd className="px-1.5 py-0.5 rounded bg-gray-100 font-mono">Enter</kbd> Select
+                                    <kbd className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-slate-700">Enter</kbd> Select
                                 </span>
                                 <span className="flex items-center gap-1">
-                                    <kbd className="px-1.5 py-0.5 rounded bg-gray-100 font-mono">Esc</kbd> Close
+                                    <kbd className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-slate-700">Esc</kbd> Close
                                 </span>
                             </div>
                         </div>
@@ -242,23 +242,23 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                                 key={result.id}
                                                                 onClick={() => handleSelect(result)}
                                                                 className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left ${globalIndex === selectedIndex
-                                                                    ? "bg-black text-white"
-                                                                    : "hover:bg-gray-50"
+                                                                    ? "bg-slate-900 text-white"
+                                                                    : "bg-white text-slate-900 hover:bg-gray-50"
                                                                     }`}
                                                             >
                                                                 <div className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 ${globalIndex === selectedIndex
                                                                     ? "bg-white/20"
                                                                     : "bg-gray-100"
                                                                     }`}>
-                                                                    <result.icon className={`h-5 w-5 ${globalIndex === selectedIndex ? "text-white" : "text-gray-600"}`} />
+                                                                    <result.icon className={`h-5 w-5 ${globalIndex === selectedIndex ? "text-white" : "text-slate-600"}`} />
                                                                 </div>
                                                                 <div className="flex-1 min-w-0">
                                                                     <p className="font-semibold truncate">{result.title}</p>
-                                                                    <p className={`text-sm truncate ${globalIndex === selectedIndex ? "text-white/70" : "text-gray-500"}`}>
+                                                                    <p className={`text-sm truncate ${globalIndex === selectedIndex ? "text-white/80" : "text-slate-600"}`}>
                                                                         {result.description}
                                                                     </p>
                                                                 </div>
-                                                                <ArrowRight className={`h-4 w-4 shrink-0 ${globalIndex === selectedIndex ? "text-white" : "text-gray-300"}`} />
+                                                                <ArrowRight className={`h-4 w-4 shrink-0 ${globalIndex === selectedIndex ? "text-white" : "text-slate-400"}`} />
                                                             </button>
                                                         )
                                                     })}
@@ -288,9 +288,9 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                     key={action.label}
                                                     href={action.href}
                                                     onClick={onClose}
-                                                    className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-black hover:text-white transition-all group"
+                                                    className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 text-slate-900 hover:bg-black hover:text-white transition-all group"
                                                 >
-                                                    <action.icon className="h-5 w-5" />
+                                                    <action.icon className="h-5 w-5 shrink-0 text-slate-600 group-hover:text-white" />
                                                     <span className="font-medium text-sm">{action.label}</span>
                                                 </Link>
                                             ))}
@@ -307,11 +307,11 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 {recentSearches.map((search) => (
                                                     <div
                                                         key={search}
-                                                        className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-sm group"
+                                                        className="group flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1.5 text-sm text-slate-800"
                                                     >
                                                         <button
                                                             onClick={() => setQuery(search)}
-                                                            className="hover:text-black transition-colors"
+                                                            className="transition-colors hover:text-slate-950"
                                                         >
                                                             {search}
                                                         </button>
@@ -337,7 +337,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 <button
                                                     key={search}
                                                     onClick={() => setQuery(search)}
-                                                    className="px-4 py-2 rounded-full border border-gray-200 text-sm font-medium hover:bg-black hover:text-white hover:border-black transition-all"
+                                                    className="rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-slate-800 transition-all hover:border-black hover:bg-black hover:text-white"
                                                 >
                                                     {search}
                                                 </button>
