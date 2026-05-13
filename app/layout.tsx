@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import "goey-toast/styles.css";
+import { AppToaster } from "@/components/app-toaster";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -8,8 +10,9 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Hospitals",
-  description: "Discover Hospitals, Access Care, & Find Trusted Services Nearby",
+  title: "Ghana Chemical Society (GCS)",
+  description:
+    "The Ghana Chemical Society advances chemistry education, research, innovation, and scientific collaboration in Ghana and beyond.",
 };
 
 export default function RootLayout({
@@ -23,6 +26,7 @@ export default function RootLayout({
         className={`${outfit.variable} font-sans antialiased`}
       >
         {children}
+        <AppToaster />
       </body>
     </html>
   );

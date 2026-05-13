@@ -1,35 +1,43 @@
 "use client";
 
-import { Smile, ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
-import { useState, useEffect, useCallback } from "react"
-import { AnimatePresence, motion } from "framer-motion"
+import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { useState, useEffect, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const testimonials = [
     {
-        name: "Kenneth Owusu",
-        role: "Project Manager",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
-        quote: "The care I received was world-class. The specialists at GAEC Hospital are truly dedicated to patient wellness and recovery."
+        name: "Prof. Kwame Mensah",
+        role: "Professor of Chemistry · University of Ghana",
+        image:
+            "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop",
+        quote:
+            "GCS has been indispensable for building bridges between departments and industry. The society elevates standards for teaching and research chemistry nationwide.",
     },
     {
-        name: "Ama Serwaa",
-        role: "Business Consultant",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
-        quote: "From the moment I walked in, I felt at home. The facilities are modern and the staff is extremely professional."
+        name: "Dr. Ama Serwaa Osei",
+        role: "Principal Scientist · Ghana Standards Authority",
+        image:
+            "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+        quote:
+            "Through workshops and technical programmes, GCS gives practitioners access to cutting-edge practice and a network of peers we can rely on for real-world problems.",
     },
     {
-        name: "Kwasi Appiah",
-        role: "Software Engineer",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
-        quote: "Their cardiology department is exceptional. I highly recommend GAEC for anyone seeking thorough and compassionate care."
+        name: "Kofi Owusu-Ankomah",
+        role: "PhD Researcher · Catalysis & Green Chemistry",
+        image:
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+        quote:
+            "Presenting at the annual symposium and connecting with mentors through the society opened doors I would not have found on my own. It is the hub for early-career chemists.",
     },
     {
-        name: "Abena Boateng",
-        role: "Education Specialist",
-        image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=200&auto=format&fit=crop",
-        quote: "A truly modern approach to healthcare. The scheduling process was seamless and the results were life-changing."
-    }
+        name: "Efua Brookman",
+        role: "R&D Lead · Pharmaceutical Manufacturing",
+        image:
+            "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
+        quote:
+            "The Ghana Chemical Society represents the rigour and collaboration our sector needs. Membership signals commitment to ethics, safety, and scientific excellence.",
+    },
 ];
 
 export function Testimonials() {
@@ -55,42 +63,42 @@ export function Testimonials() {
         enter: (direction: number) => ({
             x: direction > 0 ? 100 : -100,
             opacity: 0,
-            scale: 0.95
+            scale: 0.95,
         }),
         center: {
             zIndex: 1,
             x: 0,
             opacity: 1,
-            scale: 1
+            scale: 1,
         },
         exit: (direction: number) => ({
             zIndex: 0,
             x: direction < 0 ? 100 : -100,
             opacity: 0,
-            scale: 0.95
-        })
+            scale: 0.95,
+        }),
     };
 
     return (
-        <section className="relative w-full py-24 px-6 bg-white overflow-hidden flex flex-col items-center">
+        <section className="relative flex w-full flex-col items-center overflow-hidden bg-gcs-surface px-6 py-24">
 
-            {/* Decorative Arc */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150vw] h-[150vw] md:w-[120vw] md:h-[120vw] bg-transparent border-[1px] border-gray-100 rounded-full pointer-events-none -translate-y-1/2 z-0"></div>
+            <div className="pointer-events-none absolute left-1/2 top-0 z-0 h-[150vw] w-[150vw] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gcs-border/50 bg-transparent md:h-[120vw] md:w-[120vw]"></div>
 
-            <div className="relative z-10 max-w-4xl mx-auto text-center mt-12 md:mt-16">
+            <div className="relative z-10 mx-auto mt-12 max-w-4xl text-center md:mt-16">
 
-                {/* Header Badge */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="inline-flex items-center gap-2 mb-12 bg-gray-50 px-6 py-2 rounded-full border border-gray-100 shadow-sm"
+                    className="mb-12 inline-flex items-center gap-2 rounded-full border border-gcs-border bg-gcs-muted-bg/60 px-6 py-2 shadow-sm"
                 >
-                    <span className="font-bold text-sm md:text-base tracking-wider uppercase text-gray-500">Testimonials</span>
-                    <Smile className="h-5 w-5 text-black" />
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gcs-muted-text md:text-sm">
+                        Member voices
+                    </span>
+                    <Quote className="h-5 w-5 text-gcs-primary" />
                 </motion.div>
 
-                <div className="min-h-[300px] flex flex-col items-center justify-center relative">
+                <div className="relative flex min-h-[300px] flex-col items-center justify-center">
                     <AnimatePresence initial={false} custom={direction} mode="wait">
                         <motion.div
                             key={index}
@@ -102,43 +110,49 @@ export function Testimonials() {
                             transition={{
                                 x: { type: "spring", stiffness: 300, damping: 30 },
                                 opacity: { duration: 0.4 },
-                                scale: { duration: 0.4 }
+                                scale: { duration: 0.4 },
                             }}
                             className="w-full"
                         >
-                            {/* Quote */}
                             <div className="relative mb-12">
-                                <span className="text-6xl md:text-8xl font-serif text-gray-100 absolute -top-12 -left-4 md:-left-12 select-none">❝</span>
-                                <p className="text-2xl md:text-4xl font-medium leading-relaxed text-black tracking-tight italic">
+                                <span className="absolute -left-4 -top-12 select-none font-serif text-6xl text-gcs-muted-bg md:-left-12 md:text-8xl">
+                                    ❝
+                                </span>
+                                <p className="text-2xl font-medium italic leading-relaxed tracking-tight text-gcs-foreground md:text-3xl lg:text-4xl">
                                     {testimonials[index].quote}
                                 </p>
                             </div>
 
-                            {/* User Profile */}
                             <div className="flex flex-col items-center gap-4">
-                                <div className="relative h-20 w-20 md:h-24 md:w-24 rounded-3xl overflow-hidden shadow-2xl shadow-black/10 border-4 border-white transform rotate-3 transition-transform hover:rotate-0 duration-500">
+                                <div className="relative h-20 w-20 overflow-hidden rounded-3xl border-4 border-white shadow-2xl shadow-slate-900/10 transition-transform duration-500 transform rotate-3 hover:rotate-0 md:h-24 md:w-24">
                                     <Image
                                         src={testimonials[index].image}
                                         alt={testimonials[index].name}
                                         fill
                                         className="object-cover"
+                                        sizes="96px"
                                     />
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-xl md:text-2xl text-black transition-all">{testimonials[index].name}</h4>
-                                    <p className="text-gray-400 font-medium tracking-wide uppercase text-xs md:text-sm mt-1">{testimonials[index].role}</p>
+                                    <h4 className="text-xl font-bold text-gcs-foreground transition-all md:text-2xl">
+                                        {testimonials[index].name}
+                                    </h4>
+                                    <p className="mt-1 text-xs font-medium uppercase tracking-wide text-gcs-muted-text md:text-sm normal-case">
+                                        {testimonials[index].role}
+                                    </p>
                                 </div>
                             </div>
                         </motion.div>
                     </AnimatePresence>
                 </div>
 
-                {/* Controls & Dots */}
-                <div className="flex flex-col items-center gap-8 mt-16">
+                <div className="mt-16 flex flex-col items-center gap-8">
                     <div className="flex items-center gap-6">
                         <button
+                            type="button"
                             onClick={prev}
-                            className="h-12 w-12 rounded-full border border-gray-100 flex items-center justify-center bg-white text-black hover:bg-black hover:text-white transition-all shadow-sm active:scale-90"
+                            aria-label="Previous testimonial"
+                            className="flex h-12 w-12 items-center justify-center rounded-full border border-gcs-border bg-white text-gcs-foreground shadow-sm transition-all hover:bg-gcs-primary hover:text-white active:scale-90"
                         >
                             <ChevronLeft className="h-5 w-5" />
                         </button>
@@ -146,25 +160,31 @@ export function Testimonials() {
                             {testimonials.map((_, i) => (
                                 <button
                                     key={i}
+                                    type="button"
                                     onClick={() => {
                                         setDirection(i > index ? 1 : -1);
                                         setIndex(i);
                                     }}
-                                    className={`h-2 transition-all duration-300 rounded-full ${index === i ? "bg-black w-8" : "bg-gray-200 w-2 hover:bg-gray-400"
-                                        }`}
+                                    aria-label={`Go to testimonial ${i + 1}`}
+                                    className={`h-2 rounded-full transition-all duration-300 ${
+                                        index === i
+                                            ? "w-8 bg-gcs-primary"
+                                            : "w-2 bg-gcs-border hover:bg-gcs-muted-text/40"
+                                    }`}
                                 />
                             ))}
                         </div>
                         <button
+                            type="button"
                             onClick={next}
-                            className="h-12 w-12 rounded-full border border-gray-100 flex items-center justify-center bg-white text-black hover:bg-black hover:text-white transition-all shadow-sm active:scale-90"
+                            aria-label="Next testimonial"
+                            className="flex h-12 w-12 items-center justify-center rounded-full border border-gcs-border bg-white text-gcs-foreground shadow-sm transition-all hover:bg-gcs-primary hover:text-white active:scale-90"
                         >
                             <ChevronRight className="h-5 w-5" />
                         </button>
                     </div>
                 </div>
-
             </div>
         </section>
-    )
+    );
 }

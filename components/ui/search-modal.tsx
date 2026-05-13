@@ -2,47 +2,37 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, X, ArrowRight, Clock, TrendingUp, Stethoscope, User, MapPin, Calendar } from "lucide-react"
+import { Search, X, ArrowRight, Clock, TrendingUp, FlaskConical, Users, BookOpen, Calendar, Newspaper, MapPin } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-// Searchable data - in production this would come from an API
+// Placeholder index — replace with API-backed search when ready
 const searchData = {
-    services: [
-        { id: 1, title: "General Consultation", description: "Primary care and health checkups", href: "/book-appointment", icon: Stethoscope },
-        { id: 2, title: "Cardiology", description: "Heart and cardiovascular care", href: "/book-appointment", icon: Stethoscope },
-        { id: 3, title: "Pediatrics", description: "Children's health services", href: "/book-appointment", icon: Stethoscope },
-        { id: 4, title: "Dental Care", description: "Oral health and dentistry", href: "/book-appointment", icon: Stethoscope },
-        { id: 5, title: "Neurology", description: "Brain and nervous system", href: "/book-appointment", icon: Stethoscope },
-        { id: 6, title: "Orthopedics", description: "Bone and joint care", href: "/book-appointment", icon: Stethoscope },
-        { id: 7, title: "Emergency Care", description: "24/7 emergency services", href: "/book-appointment", icon: Stethoscope },
-        { id: 8, title: "Pharmacy", description: "On-site medication services", href: "#", icon: Stethoscope },
-    ],
-    doctors: [
-        { id: 1, title: "Dr. Kwame Asante", description: "Chief Medical Officer", href: "/about", icon: User },
-        { id: 2, title: "Dr. Ama Mensah", description: "Head of Cardiology", href: "/about", icon: User },
-        { id: 3, title: "Dr. Kofi Owusu", description: "Director of Surgery", href: "/about", icon: User },
-        { id: 4, title: "Dr. Efua Boateng", description: "Head of Pediatrics", href: "/about", icon: User },
+    programs: [
+        { id: 1, title: "Membership", description: "Join or renew your GCS membership", href: "/membership", icon: Users },
+        { id: 2, title: "Publications hub", description: "Journals, articles, and research outputs", href: "/publications", icon: BookOpen },
+        { id: 3, title: "Conferences & symposia", description: "Upcoming scientific meetings", href: "/events", icon: Calendar },
+        { id: 4, title: "News & announcements", description: "Society news and outreach", href: "/news", icon: Newspaper },
     ],
     pages: [
-        { id: 1, title: "About Us", description: "Learn about our hospital", href: "/about", icon: MapPin },
-        { id: 2, title: "Contact", description: "Get in touch with us", href: "/contact", icon: MapPin },
-        { id: 3, title: "Book Appointment", description: "Schedule a consultation", href: "/book-appointment", icon: Calendar },
+        { id: 1, title: "About the Society", description: "Mission, structure, and leadership", href: "/about", icon: MapPin },
+        { id: 2, title: "Contact & inquiries", description: "Reach the secretariat", href: "/contact", icon: MapPin },
+        { id: 3, title: "Ghana Chemical Society", description: "Return to the homepage", href: "/", icon: FlaskConical },
     ],
 }
 
 const quickActions = [
-    { label: "Book Appointment", href: "/book-appointment", icon: Calendar },
-    { label: "Find a Doctor", href: "/about", icon: User },
-    { label: "Contact Us", href: "/contact", icon: MapPin },
+    { label: "Membership", href: "/membership", icon: Users },
+    { label: "Publications", href: "/publications", icon: BookOpen },
+    { label: "Contact", href: "/contact", icon: MapPin },
 ]
 
 const trendingSearches = [
-    "Cardiology",
-    "Emergency Care",
-    "Dr. Kwame Asante",
-    "General Consultation",
+    "Membership",
+    "Conference",
+    "Publications",
+    "About GCS",
 ]
 
 interface SearchResult {
@@ -69,7 +59,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     // Load recent searches from localStorage
     useEffect(() => {
-        const saved = localStorage.getItem("hospital-recent-searches")
+        const saved = localStorage.getItem("gcs-recent-searches")
         if (saved) {
             setRecentSearches(JSON.parse(saved))
         }
@@ -97,22 +87,13 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         const q = searchQuery.toLowerCase()
         const allResults: SearchResult[] = []
 
-        // Search services
-        searchData.services.forEach(item => {
+        searchData.programs.forEach((item) => {
             if (item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)) {
-                allResults.push({ ...item, category: "Services" })
+                allResults.push({ ...item, category: "Programs" })
             }
         })
 
-        // Search doctors
-        searchData.doctors.forEach(item => {
-            if (item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)) {
-                allResults.push({ ...item, category: "Doctors" })
-            }
-        })
-
-        // Search pages
-        searchData.pages.forEach(item => {
+        searchData.pages.forEach((item) => {
             if (item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)) {
                 allResults.push({ ...item, category: "Pages" })
             }
@@ -130,7 +111,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const saveRecentSearch = (searchTerm: string) => {
         const updated = [searchTerm, ...recentSearches.filter(s => s !== searchTerm)].slice(0, 5)
         setRecentSearches(updated)
-        localStorage.setItem("hospital-recent-searches", JSON.stringify(updated))
+        localStorage.setItem("gcs-recent-searches", JSON.stringify(updated))
     }
 
     // Handle result selection
@@ -174,7 +155,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const clearRecentSearch = (searchTerm: string) => {
         const updated = recentSearches.filter(s => s !== searchTerm)
         setRecentSearches(updated)
-        localStorage.setItem("hospital-recent-searches", JSON.stringify(updated))
+        localStorage.setItem("gcs-recent-searches", JSON.stringify(updated))
     }
 
     // Group results by category
@@ -216,8 +197,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                     type="text"
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
-                                    placeholder="Search services, doctors, pages..."
-                                    className="w-full h-14 pl-12 pr-12 text-base md:text-lg rounded-xl bg-gray-50 border-transparent focus:bg-white focus:border-black transition-all"
+                                    placeholder="Search programs, pages, and resources…"
+                                    className="w-full h-14 pl-12 pr-12 text-base md:text-lg rounded-xl bg-gray-50 border-transparent focus:bg-white focus:border-gcs-primary transition-all"
                                 />
                                 {query && (
                                     <button

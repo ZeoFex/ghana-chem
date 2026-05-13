@@ -1,21 +1,41 @@
 @import "tailwindcss";
 
+/* Ghana Chemical Society (GCS) design tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --gcs-primary: #1d4ed8;
+  --gcs-primary-hover: #1e40af;
+  --gcs-secondary: #0ea5e9;
+  --gcs-secondary-hover: #0284c7;
+  --gcs-accent: #38bdf8;
+  --gcs-surface: #ffffff;
+  --gcs-muted-bg: #eff6ff;
+  --gcs-muted-text: #475569;
+  --gcs-foreground-rich: #0f172a;
+  --gcs-border: #cbd5e1;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gcs-foreground: var(--gcs-foreground-rich);
+  --color-gcs-primary: var(--gcs-primary);
+  --color-gcs-primary-hover: var(--gcs-primary-hover);
+  --color-gcs-secondary: var(--gcs-secondary);
+  --color-gcs-secondary-hover: var(--gcs-secondary-hover);
+  --color-gcs-accent: var(--gcs-accent);
+  --color-gcs-surface: var(--gcs-surface);
+  --color-gcs-muted-bg: var(--gcs-muted-bg);
+  --color-gcs-muted-text: var(--gcs-muted-text);
+  --color-gcs-border: var(--gcs-border);
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #020617;
+    --foreground: #e2e8f0;
   }
 }
 

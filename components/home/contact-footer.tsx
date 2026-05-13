@@ -10,7 +10,7 @@ export function ContactFooter() {
             <div className="relative w-full max-w-[1440px] mx-auto px-4 sm:px-8 mb-24">
                 <div className="relative z-10 flex flex-wrap justify-center text-center">
                     <h2 className="text-[12vw] leading-[0.85] font-medium tracking-tighter text-black uppercase">
-                        HOSPITAL- Contact
+                        GHANA CHEM - CONTACT
                     </h2>
                 </div>
 
@@ -58,9 +58,9 @@ export function ContactFooter() {
 
                     {/* Desc */}
                     <p className="text-gray-500 text-xs max-w-md mx-auto leading-relaxed">
-                        Our top-tier medical facilities offer a comprehensive range
-                        of services, including advanced diagnostics, specialized
-                        treatment centers, and 24/7 emergency care.
+                        FI Ghana Chem connects professionals across research,
+                        industry, and education—advancing chemistry and supporting
+                        members through networking, resources, and shared expertise.
                     </p>
 
                     {/* Socials */}
@@ -75,7 +75,7 @@ export function ContactFooter() {
 
                 {/* Right: Copyright */}
                 <div className="text-sm font-medium text-right">
-                    © 2025 Hospitals. All Rights Reserved.
+                    © 2026 FI Ghana Chem. All Rights Reserved.
                 </div>
             </div>
         </footer>

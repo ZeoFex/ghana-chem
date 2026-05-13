@@ -1,12 +1,37 @@
 "use client";
 
-import Link from "next/link"
-import { Search, Menu, Sun, ArrowUpRight, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useState, useEffect } from "react"
-import { usePathname } from "next/navigation"
-import { AnimatePresence, motion } from "framer-motion"
-import { SearchModal } from "@/components/ui/search-modal"
+import Link from "next/link";
+import {
+    Search,
+    Menu,
+    ArrowUpRight,
+    X,
+    FlaskConical,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { SearchModal } from "@/components/ui/search-modal";
+
+const NAV = [
+    { label: "About", href: "/about" },
+    { label: "Membership", href: "/membership" },
+    { label: "Publications", href: "/publications" },
+    { label: "Events", href: "/events" },
+    { label: "News", href: "/news" },
+    { label: "Contact", href: "/contact" },
+] as const;
+
+const LIGHT_HEADER_PATHS = [
+    "/about",
+    "/contact",
+    "/membership",
+    "/publications",
+    "/events",
+    "/news",
+    "/login",
+];
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,29 +39,28 @@ export function Header() {
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
 
-    const isLightPage = pathname === "/book-appointment" || pathname === "/about" || pathname === "/contact" || pathname === "/services" || pathname === "/facilities";
+    const isLightPage = LIGHT_HEADER_PATHS.some(
+        (p) => pathname === p || pathname.startsWith(`${p}/`)
+    );
     const showBackground = scrolled || isLightPage;
 
-    // Prevent scrolling when menu is open
     useEffect(() => {
         if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = "hidden";
         } else {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = "unset";
         }
-        return () => { document.body.style.overflow = 'unset'; }
+        return () => {
+            document.body.style.overflow = "unset";
+        };
     }, [isMenuOpen]);
 
-    // Handle scroll
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
+        const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Keyboard shortcut to open search (Cmd/Ctrl + K)
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -48,36 +72,52 @@ export function Header() {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, []);
 
+    const pillOnHero = !showBackground;
+    const pillClass = pillOnHero
+        ? "border-white/25 bg-white/12 text-white backdrop-blur-md hover:bg-white/20"
+        : "border-gcs-border/80 bg-slate-100/90 text-gcs-foreground hover:bg-slate-200/90";
+
     return (
         <>
-            <header className={`fixed top-0 left-0 right-0 z-50 flex items-start justify-between px-6 py-4 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-lg border-b border-gray-100/50 pt-4" : "pt-6 pointer-events-none"
-                }`}>
+            <header
+                className={`fixed top-0 left-0 right-0 z-50 flex items-start justify-between px-4 py-4 transition-all duration-300 sm:px-6 ${
+                    scrolled
+                        ? "border-b border-gcs-border/70 bg-white/85 pt-4 backdrop-blur-lg"
+                        : "pt-6"
+                } ${!scrolled && !isLightPage ? "pointer-events-none" : ""}`}
+            >
 
-                {/* Left Nav Pills + Logo */}
-                <nav className="flex items-center gap-1 pointer-events-auto">
-                    <Link href="/" className="flex items-center gap-2 mr-6 group">
-                        <div className={`rounded-full p-1 transition-colors ${showBackground ? "bg-black" : "bg-white"}`}>
-                            <Sun className={`h-6 w-6 transition-colors ${showBackground ? "text-white fill-white" : "text-black fill-black"}`} />
+                <nav className="pointer-events-auto flex items-center gap-0.5 md:gap-1">
+                    <Link href="/" className="group mr-3 flex items-center gap-2.5 sm:mr-6">
+                        <div
+                            className={`rounded-full p-1.5 transition-colors ${
+                                showBackground ? "bg-gcs-primary" : "bg-white"
+                            }`}
+                        >
+                            <FlaskConical
+                                className={`h-5 w-5 transition-colors sm:h-6 sm:w-6 ${
+                                    showBackground ? "text-white" : "text-gcs-primary"
+                                }`}
+                            />
                         </div>
-                        <span className={`font-bold text-xl tracking-tight transition-colors ${showBackground ? "text-black" : "text-white drop-shadow-md"
-                            }`}>Hospitals</span>
+                        <span
+                            className={`flex flex-col leading-tight transition-colors ${
+                                showBackground ? "text-gcs-foreground" : "text-white drop-shadow-md"
+                            }`}
+                        >
+                            <span className="text-base font-bold tracking-tight sm:text-xl">GCS</span>
+                            <span className="hidden text-[0.65rem] font-medium uppercase tracking-[0.2em] text-current/80 sm:block">
+                                Ghana Chemical Society
+                            </span>
+                        </span>
                     </Link>
 
-                    {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-1">
-                        {[
-                            { label: "About Us", href: "/about" },
-                            { label: "Services", href: "/services" },
-                            { label: "Facilities", href: "/facilities" },
-                            { label: "Contact", href: "/contact" }
-                        ].map((item) => (
+                    <div className="hidden items-center gap-1 lg:flex">
+                        {NAV.map((item) => (
                             <Link
-                                key={item.label}
+                                key={item.href}
                                 href={item.href}
-                                className={`px-5 py-2.5 rounded-full border transition-all capitalize text-sm font-medium ${showBackground
-                                    ? "bg-black/5 border-black/10 text-black hover:bg-black/10"
-                                    : "bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
-                                    }`}
+                                className={`rounded-full border px-3 py-2 text-sm font-medium capitalize transition-all xl:px-4 ${pillClass}`}
                             >
                                 {item.label}
                             </Link>
@@ -85,41 +125,36 @@ export function Header() {
                     </div>
                 </nav>
 
-
-                {/* Right Actions */}
-                <div className="flex items-center gap-3 pointer-events-auto">
-                    {/* Search Button - Desktop */}
+                <div className="pointer-events-auto flex items-center gap-2 sm:gap-3">
                     <button
+                        type="button"
                         onClick={() => setIsSearchOpen(true)}
-                        className={`hidden lg:flex items-center gap-3 h-12 px-5 rounded-full border transition-all ${showBackground
-                            ? "bg-black/5 border-black/10 text-black hover:bg-black/10"
-                            : "bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
-                            }`}
+                        className={`hidden h-11 items-center gap-2 rounded-full border px-4 transition-all lg:flex xl:h-12 xl:gap-3 xl:px-5 ${pillClass}`}
                     >
-                        <Search className="h-4 w-4" />
-                        <span className="text-sm font-medium">Search...</span>
-                        <kbd className={`hidden xl:inline-flex items-center gap-0.5 px-2 py-1 rounded text-xs font-mono ${showBackground ? "bg-black/10" : "bg-white/20"
-                            }`}>
+                        <Search className="h-4 w-4 shrink-0" />
+                        <span className="text-sm font-medium">Search…</span>
+                        <kbd
+                            className={`hidden items-center gap-0.5 rounded px-2 py-1 font-mono text-xs xl:inline-flex ${
+                                pillOnHero ? "bg-white/20" : "bg-slate-200/90"
+                            }`}
+                        >
                             ⌘K
                         </kbd>
                     </button>
 
-                    {/* Search Icon - Tablet */}
                     <button
+                        type="button"
                         onClick={() => setIsSearchOpen(true)}
-                        className={`hidden md:flex lg:hidden items-center justify-center h-12 w-12 rounded-full border transition-all ${showBackground
-                            ? "bg-black/5 border-black/10 text-black hover:bg-black/10"
-                            : "bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
-                            }`}
+                        className={`flex h-11 w-11 items-center justify-center rounded-full border transition-all lg:hidden xl:h-12 xl:w-12 ${pillClass}`}
                     >
                         <Search className="h-5 w-5" />
                     </button>
 
-                    <Link href="/book-appointment" className="hidden sm:block">
-                        <Button className="h-12 rounded-full bg-black text-white hover:bg-black/90 pl-6 pr-2 gap-3 text-base">
-                            Book Now
-                            <div className="bg-white rounded-full h-8 w-8 flex items-center justify-center">
-                                <ArrowUpRight className="h-4 w-4 text-black" />
+                    <Link href="/membership" className="hidden sm:block">
+                        <Button className="h-11 gap-2 rounded-full border-0 bg-gcs-primary pl-5 pr-1.5 text-base text-white shadow-sm hover:bg-gcs-primary-hover xl:h-12 xl:pl-6 xl:pr-2">
+                            Join GCS
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
+                                <ArrowUpRight className="h-4 w-4 text-gcs-primary" />
                             </div>
                         </Button>
                     </Link>
@@ -127,26 +162,17 @@ export function Header() {
                     <Button
                         variant="ghost"
                         size="icon"
+                        type="button"
                         onClick={() => setIsMenuOpen(true)}
-                        className="h-12 w-12 rounded-full bg-black text-white hover:bg-black/80 flex items-center justify-center md:hidden"
-                    >
-                        <Menu className="h-6 w-6" />
-                    </Button>
-
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-12 w-12 rounded-full bg-black text-white hover:bg-black/80 hidden md:flex items-center justify-center"
+                        className="flex h-11 w-11 items-center justify-center rounded-full bg-gcs-primary text-white hover:bg-gcs-primary-hover lg:hidden"
                     >
                         <Menu className="h-6 w-6" />
                     </Button>
                 </div>
             </header>
 
-            {/* Search Modal */}
             <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
-            {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
@@ -154,19 +180,24 @@ export function Header() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: "-100%" }}
                         transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                        className="fixed inset-0 z-[60] bg-black text-white flex flex-col p-6 md:hidden"
+                        className="fixed inset-0 z-[60] flex flex-col bg-[#020617] p-6 text-white lg:hidden"
                     >
-                        <div className="flex items-center justify-between mb-8">
-                            <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-2">
-                                <div className="bg-white rounded-full p-1">
-                                    <Sun className="h-6 w-6 text-black fill-black" />
+                        <div className="mb-8 flex items-center justify-between">
+                            <Link
+                                href="/"
+                                onClick={() => setIsMenuOpen(false)}
+                                className="flex items-center gap-2"
+                            >
+                                <div className="rounded-full bg-gcs-primary p-1.5">
+                                    <FlaskConical className="h-6 w-6 text-white" />
                                 </div>
-                                <span className="font-bold text-xl tracking-tight">Hospitals</span>
+                                <span className="text-lg font-bold tracking-tight">GCS</span>
                             </Link>
 
                             <Button
                                 variant="ghost"
                                 size="icon"
+                                type="button"
                                 onClick={() => setIsMenuOpen(false)}
                                 className="h-12 w-12 rounded-full bg-white/10 text-white hover:bg-white/20"
                             >
@@ -174,27 +205,22 @@ export function Header() {
                             </Button>
                         </div>
 
-                        {/* Mobile Search Bar */}
                         <button
+                            type="button"
                             onClick={() => {
                                 setIsMenuOpen(false);
                                 setTimeout(() => setIsSearchOpen(true), 300);
                             }}
-                            className="w-full flex items-center gap-3 h-14 px-5 rounded-2xl bg-white/10 border border-white/20 mb-8 text-left"
+                            className="mb-8 flex h-14 w-full items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 text-left text-white/70"
                         >
-                            <Search className="h-5 w-5 text-white/60" />
-                            <span className="text-white/60">Search services, doctors...</span>
+                            <Search className="h-5 w-5 shrink-0 text-white/50" />
+                            <span>Search the society site…</span>
                         </button>
 
-                        <nav className="flex flex-col gap-6 text-2xl font-medium">
-                            {[
-                                { label: "About Us", href: "/about" },
-                                { label: "Services", href: "/services" },
-                                { label: "Facilities", href: "/facilities" },
-                                { label: "Contact", href: "/contact" }
-                            ].map((item) => (
+                        <nav className="flex flex-col gap-5 text-2xl font-medium">
+                            {NAV.map((item) => (
                                 <Link
-                                    key={item.label}
+                                    key={item.href}
                                     href={item.href}
                                     onClick={() => setIsMenuOpen(false)}
                                     className="border-b border-white/10 pb-4"
@@ -205,9 +231,12 @@ export function Header() {
                         </nav>
 
                         <div className="mt-auto flex flex-col gap-4">
-                            <Button asChild className="h-14 w-full rounded-full bg-white text-black hover:bg-gray-100 gap-3 text-lg font-semibold">
-                                <Link href="/book-appointment" onClick={() => setIsMenuOpen(false)}>
-                                    Book Appointment
+                            <Button
+                                asChild
+                                className="h-14 w-full gap-3 rounded-full bg-gcs-primary text-lg font-semibold text-white hover:bg-gcs-primary-hover"
+                            >
+                                <Link href="/membership" onClick={() => setIsMenuOpen(false)}>
+                                    Join Ghana Chemical Society
                                     <ArrowUpRight className="h-5 w-5" />
                                 </Link>
                             </Button>
@@ -216,5 +245,5 @@ export function Header() {
                 )}
             </AnimatePresence>
         </>
-    )
+    );
 }

@@ -79,10 +79,13 @@ export default function AdminLayout({
                             Get Support
                         </Button>
                     </div>
-                    <button className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-100 hover:text-black w-full transition-colors">
+                    <Link
+                        href="/login"
+                        className="flex w-full items-center gap-3 rounded-xl px-4 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-black"
+                    >
                         <LogOut className="h-5 w-5" />
                         <span>Logout</span>
-                    </button>
+                    </Link>
                 </div>
             </aside>
 

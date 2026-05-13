@@ -1,111 +1,135 @@
-import Image from "next/image"
-import { ArrowRight, ArrowUpRight, ArrowLeft } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const SECONDARY_IMAGE =
+    "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&w=1200&q=80";
 
 export function ExploreSection() {
     return (
-        <section className="w-full py-24 px-6 md:px-12 bg-white text-black overflow-hidden">
+        <section className="w-full overflow-hidden bg-gcs-surface px-6 py-20 text-gcs-foreground md:px-12 md:py-24">
 
-            {/* Header */}
-            <div className="flex flex-col items-center text-center mb-16">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gray-200 text-sm font-medium mb-6 hover:bg-gray-50 cursor-pointer transition-colors">
-                    Let&apos;s know us <ArrowRight className="h-3 w-3" />
+            <div className="mb-14 flex flex-col items-center text-center md:mb-16">
+                <div className="mb-6 inline-flex cursor-default items-center gap-2 rounded-full border border-gcs-border bg-gcs-muted-bg/50 px-4 py-1.5 text-sm font-medium text-gcs-muted-text transition-colors">
+                    Our mission <ArrowRight className="h-3.5 w-3.5 text-gcs-primary" />
                 </div>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight max-w-4xl mx-auto leading-[1.1]">
-                    Explore Options, About Hospitals, <br className="hidden md:block" /> Your Health, Our Priority
+                <h2 className="mx-auto max-w-4xl text-4xl font-medium leading-[1.1] tracking-tight md:text-5xl lg:text-[2.75rem] lg:leading-[1.08]">
+                    Advancing chemistry for Ghana&rsquo;s universities,{" "}
+                    <br className="hidden md:block" />
+                    laboratories, and industries
                 </h2>
             </div>
 
-            {/* Grid Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-[1440px] mx-auto">
+            <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
 
-                {/* Left Column (Text Content) */}
-                <div className="lg:col-span-3 flex flex-col justify-start pt-4">
-                    <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 text-sm font-medium self-start mb-6">
-                        About Us
+                <div className="flex flex-col justify-start pt-1 lg:col-span-3">
+                    <div className="mb-6 inline-block self-start rounded-full border border-gcs-border bg-gcs-muted-bg/40 px-4 py-1.5 text-sm font-medium text-gcs-muted-text">
+                        About the Society
                     </div>
-                    <p className="text-xl md:text-2xl font-medium leading-relaxed mb-8">
-                        Hospitals is a trusted platform connecting patients with top hospitals across the country.
+                    <p className="mb-8 text-xl font-medium leading-relaxed text-gcs-foreground md:text-2xl">
+                        The Ghana Chemical Society brings together educators, researchers, students,
+                        and industry professionals to strengthen chemistry education and research.
                     </p>
-                    <Button className="rounded-full bg-black text-white h-12 px-6 w-fit gap-4 group mt-auto hover:bg-black/80">
-                        Learn More
-                        <div className="bg-white rounded-full h-8 w-8 flex items-center justify-center group-hover:bg-gray-100 transition-colors">
-                            <ArrowUpRight className="h-4 w-4 text-black" />
-                        </div>
+                    <Button
+                        asChild
+                        className="group mt-auto h-12 w-fit gap-3 rounded-full border-0 bg-gcs-primary px-6 text-base text-white shadow-sm hover:bg-gcs-primary-hover"
+                    >
+                        <Link href="/about">
+                            Learn more
+                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white transition-colors group-hover:bg-white/90">
+                                <ArrowUpRight className="h-4 w-4 text-gcs-primary" />
+                            </span>
+                        </Link>
                     </Button>
                 </div>
 
-                {/* Center Column (Large Image Card) */}
-                <div className="lg:col-span-5 relative h-[500px] rounded-[2.5rem] overflow-hidden group">
+                <div className="group relative h-[420px] overflow-hidden rounded-[2.5rem] sm:h-[480px] lg:col-span-5 lg:h-[500px]">
                     <Image
-                        // User requested same image as hero
-                        src="https://nextstl.com/wp-content/uploads/13146584425_d9d0402285_o.jpg"
-                        alt="Outdoor Area"
+                        src="/Hero/hero.jpg"
+                        alt="Chemistry laboratory research"
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        sizes="(max-width: 1024px) 100vw, 42vw"
                     />
-                    {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
 
-                    {/* Tags */}
-                    <div className="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm">
-                        OPD area
+                    <div className="absolute left-6 top-6 rounded-full border border-white/35 bg-white/15 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
+                        Research &amp; education
                     </div>
 
-                    <div className="absolute top-8 right-8 max-w-[200px] text-right text-white text-lg font-medium leading-tight opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        A versatile facility offering a wide range of medical services
-                    </div>
+                    <p className="absolute right-8 top-8 max-w-[220px] text-right text-lg font-medium leading-snug text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        A community dedicated to scientific excellence and national development
+                    </p>
 
-                    {/* Bottom Widgets */}
-                    <div className="absolute bottom-6 left-6 flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-sm font-medium">
-                        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-gcs-foreground shadow-sm">
+                        <MapPin className="h-4 w-4 shrink-0 text-gcs-primary" />
                         Accra, Ghana
                     </div>
 
-                    <div className="absolute bottom-6 right-6 h-12 w-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors">
-                        <ArrowUpRight className="h-5 w-5 text-black" />
-                    </div>
+                    <Link
+                        href="/about"
+                        className="absolute bottom-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-white text-gcs-foreground shadow-md transition-colors hover:bg-gcs-muted-bg"
+                        aria-label="About the society"
+                    >
+                        <ArrowUpRight className="h-5 w-5" />
+                    </Link>
                 </div>
 
-                {/* Right Column (Small Image + Text + Nav) */}
-                <div className="lg:col-span-4 flex flex-col gap-6">
-                    {/* Top Card */}
-                    <div className="relative h-[300px] rounded-[2.5rem] overflow-hidden group w-full">
+                <div className="flex flex-col gap-6 lg:col-span-4">
+                    <div className="group relative h-[260px] w-full overflow-hidden rounded-[2.5rem] sm:h-[300px]">
                         <Image
-                            src="https://nextstl.com/wp-content/uploads/13146584425_d9d0402285_o.jpg"
-                            alt="Out door"
+                            src={SECONDARY_IMAGE}
+                            alt="Laboratory glassware and chemical analysis"
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                            sizes="(max-width: 1024px) 100vw, 33vw"
                         />
-                        <div className="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm">
-                            Out door
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 to-transparent" />
+                        <div className="absolute left-6 top-6 rounded-full border border-white/35 bg-white/15 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
+                            Collaboration
                         </div>
-                        <div className="absolute bottom-6 left-6 flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-sm font-medium">
-                            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            Accra, Ghana
-                        </div>
-                        <div className="absolute bottom-6 right-6 h-12 w-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors">
-                            <ArrowUpRight className="h-5 w-5 text-black" />
-                        </div>
+                        <Link
+                            href="/events"
+                            className="absolute bottom-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-white text-gcs-foreground shadow-md transition-colors hover:bg-gcs-muted-bg"
+                            aria-label="Conferences and events"
+                        >
+                            <ArrowUpRight className="h-5 w-5" />
+                        </Link>
                     </div>
 
-                    {/* Bottom Content */}
-                    <div className="flex flex-col gap-4 mt-auto">
-                        <p className="text-gray-600 leading-relaxed text-sm max-w-sm">
-                            Explore the ideal place for healing, care, and recovery. Where compassion meets excellence in healthcare.
+                    <div className="mt-auto flex flex-col gap-5">
+                        <p className="max-w-md text-sm leading-relaxed text-gcs-muted-text md:text-base">
+                            From undergraduate training to industrial partnerships—we foster networks,
+                            disseminate knowledge, and raise the profile of chemistry in Ghana and
+                            beyond.
                         </p>
-                        <div className="flex items-center gap-4 self-end mt-4">
-                            <Button variant="outline" size="icon" className="h-12 w-12 rounded-full border-black/20 hover:bg-black hover:text-white transition-colors">
-                                <ArrowLeft className="h-5 w-5" />
-                            </Button>
-                            <Button size="icon" className="h-12 w-12 rounded-full bg-black text-white hover:bg-black/80">
-                                <ArrowRight className="h-5 w-5" />
-                            </Button>
+                        <div className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2 border-t border-gcs-border/80 pt-5">
+                            <Link
+                                href="/publications"
+                                className="text-sm font-semibold text-gcs-primary transition-colors hover:text-gcs-primary-hover"
+                            >
+                                Publications
+                                <ArrowRight className="ml-1 inline h-4 w-4 align-middle" />
+                            </Link>
+                            <Link
+                                href="/events"
+                                className="text-sm font-semibold text-gcs-primary transition-colors hover:text-gcs-primary-hover"
+                            >
+                                Events &amp; symposia
+                                <ArrowRight className="ml-1 inline h-4 w-4 align-middle" />
+                            </Link>
+                            <Link
+                                href="/membership"
+                                className="text-sm font-semibold text-gcs-primary transition-colors hover:text-gcs-primary-hover"
+                            >
+                                Membership
+                                <ArrowRight className="ml-1 inline h-4 w-4 align-middle" />
+                            </Link>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
-    )
+    );
 }
