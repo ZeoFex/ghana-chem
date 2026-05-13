@@ -27,6 +27,7 @@ const LIGHT_HEADER_PATHS = [
     "/about",
     "/contact",
     "/membership",
+    "/membership/account",
     "/publications",
     "/events",
     "/news",

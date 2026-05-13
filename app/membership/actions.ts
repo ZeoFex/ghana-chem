@@ -1,8 +1,17 @@
 "use server";
 
+import { randomBytes } from "crypto";
+
 export type MembershipRegistrationState =
-    | { ok: true }
+    | { ok: true; memberId: string }
     | { ok: false; message: string };
+
+function generateMemberId(): string {
+    const year = new Date().getUTCFullYear();
+    const yy = String(year % 100).padStart(2, "0");
+    const suffix = randomBytes(4).toString("hex").toUpperCase();
+    return `GCS-${yy}-${suffix}`;
+}
 
 function trim(formData: FormData, key: string): string {
     const v = formData.get(key);
@@ -42,5 +51,5 @@ export async function submitMembershipRegistration(
     // Operational: replace with DB insert, CRM, or email to secretariat.
     await new Promise((r) => setTimeout(r, 450));
 
-    return { ok: true };
+    return { ok: true, memberId: generateMemberId() };
 }
